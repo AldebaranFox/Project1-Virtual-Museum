@@ -1,5 +1,5 @@
 
-const selectedDepartment = JSON.parse(localStorage.getItem('selectedDepartment'));
+const selectedDepartmentAndImgToggle = JSON.parse(localStorage.getItem('selectedDepartmentAndImgToggle'));
 
 
 generatePage();
@@ -7,15 +7,15 @@ getArtPieces();
 
 //* Fill out currently available elements of page
 function generatePage(){
-   document.title = selectedDepartment.name;
-   document.querySelector('#departmentName').textContent = `Welcome to ${selectedDepartment.name}`;
+   document.title = selectedDepartmentAndImgToggle.name;
+   document.querySelector('#departmentName').textContent = `Welcome to ${selectedDepartmentAndImgToggle.name}`;
 }
 
 //* Fetch # art piece Ids for the selected department
 async function getArtPieces(){
    const itemCount = 15;
    const response = await fetch(
-      `https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=${selectedDepartment.id}`
+      `https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=${selectedDepartmentAndImgToggle.id}`
    );
    const json = await response.json();
 
@@ -28,7 +28,7 @@ async function populatePiecesList(piecesIdList){
    const piecesList = document.querySelector('#piecesList');
    piecesList.innerHTML = '';
 
-   // makes all 20 piece data requests in parallel
+   // makes all # piece data requests in parallel
    const piecesResult = await Promise.all(
       piecesIdList.map(id => getPieceInfo(id))
    );
@@ -44,7 +44,6 @@ async function populatePiecesList(piecesIdList){
          </div>
 
          <div class="pieceImg">
-            <p>image: ${pieceInfo.img}</p>
             <img src="${pieceInfo.img}" alt="Image unavailable"/>
          </div>
       `;
@@ -61,8 +60,11 @@ async function getPieceInfo(pieceId) {
    const json = await response.json();
 
    const img = json.primaryImageSmall?.trim() || json.primaryImage;
+
    //! Skip pieces without imgs
-   if (!img) return null;
+   if (!selectedDepartmentAndImgToggle.imgToggle){
+      if (!img) return null;
+   }
 
    return {
       title : json.title,

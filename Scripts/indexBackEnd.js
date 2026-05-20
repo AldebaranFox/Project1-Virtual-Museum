@@ -21,17 +21,26 @@ function populateDepartmentsList(departmentsJson){
       let li = document.createElement('li');
       li.textContent = department.displayName;
       li.addEventListener("click", () => {
-         departmentDetails(department);
+         departmentDetailsAndImgToggle(department);
          window.location.href = 'department.html';
       })
       departmentList.appendChild(li);
    })
 }
 
-//* Overrides info about selected department
-function departmentDetails(department){
-   localStorage.setItem('selectedDepartment', JSON.stringify({
+//* Exports selected department info and unavailable img toggle state
+function departmentDetailsAndImgToggle(department){
+   const imgToggle = imgToggleState();
+   localStorage.setItem('selectedDepartmentAndImgToggle', JSON.stringify({
          id: department.departmentId,
-         name: department.displayName
+         name: department.displayName,
+         imgToggle
       }))
+}
+
+function imgToggleState(){
+   const toggle = document.getElementById("imgToggle");
+   toggle.addEventListener("change", async () => {
+      const isChecked = toggle.checked;})
+   return toggle.checked
 }
