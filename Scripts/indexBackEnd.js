@@ -1,10 +1,11 @@
+
 const departmentList = document.querySelector('#departmentList');
 
 getDepartments();
 
-
-var selectedDepartmentID = 0;
+var selectedDepartmentId = 0;
 var selectedDepartmentName = '';
+
 
 //* Retrieve departments json from api
 async function getDepartments(){
@@ -20,8 +21,8 @@ function populateDepartmentsList(departmentsJson){
       let li = document.createElement('li');
       li.textContent = department.displayName;
       li.addEventListener("click", () => {
-         window.location.href = 'department.html';
          departmentDetails(department);
+         window.location.href = 'department.html';
       })
       departmentList.appendChild(li);
    })
@@ -29,7 +30,8 @@ function populateDepartmentsList(departmentsJson){
 
 //* Overrides info about selected department
 function departmentDetails(department){
-   selectedDepartmentID = department.departmentId;
-   selectedDepartmentName = department.displayName
+   localStorage.setItem('selectedDepartment', JSON.stringify({
+         id: department.departmentId,
+         name: department.displayName
+      }))
 }
-
