@@ -9,22 +9,26 @@
    </head>
    <body>
       <h1 id="welcome">Welcome to the Art Museum</h1>
+      <br>
 
       <div id="about">
-         <p>
+         <p id="aboutText">
             This is a website that allows you to navigate a virtual art museum. With access to 19 individual departments where each will contain up to 15 distinct art pieces.
             <br>All sources generated from https://metmuseum.github.io/
          </p>
       </div>
 
-   <label class="toggle">
-      <input type="checkbox" id="imgToggle"/>
-      <span class="slider"></span>
-   </label>
-   <span>Entries without images.</span>
+   <div class="toggleContainer">
+      <label class="toggle">
+         <input type="checkbox" id="imgToggle"/>
+         <span class="slider"></span>
+      </label>
+      <span>Entries without images</span>
+   </div>
 
       <div id="departmentDiv">
-         <h2>Departments</h2>
+         <p id="departmentTitle">Departments</p>
+         <br>
          <ul id="departmentList"></ul>
       </div>
 

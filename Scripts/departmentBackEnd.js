@@ -61,7 +61,7 @@ async function getPieceInfo(pieceId) {
 
    const img = json.primaryImageSmall?.trim() || json.primaryImage;
 
-   //! Skip pieces without imgs
+   //! Skip pieces without imgs (when toggle off)
    if (!selectedDepartmentAndImgToggle.imgToggle){
       if (!img) return null;
    }
