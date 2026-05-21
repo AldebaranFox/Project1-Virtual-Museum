@@ -46,6 +46,9 @@ async function populatePiecesList(piecesIdList){
          <div class="pieceImg">
             <img src="${pieceInfo.img}" alt="Image unavailable"/>
          </div>
+         <div class="descriptionContainer">
+            <p class="description">${pieceInfo.description}</p>
+         </div>
       `;
 
       piecesList.appendChild(li);
@@ -69,7 +72,8 @@ async function getPieceInfo(pieceId) {
    return {
       title : json.title,
       author : `${json.artistRole} ${json.artistDisplayName}`,
-      img : img
+      img : img,
+      description : `${json.objectBeginDate} - ${json.objectEndDate}\n` + `${json.medium}\n` + `${json.creditLine}\n` + `${json.repository}`
    }
 }
 

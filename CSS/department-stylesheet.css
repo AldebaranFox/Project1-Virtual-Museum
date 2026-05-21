@@ -1,120 +1,106 @@
+
 body{
    background-color: rgba(251, 231, 197, 0.854);
-
    display: flex;
    flex-direction: column;
    align-items: center;
-
    margin: 0;
    padding: 20px;
-
    font-family: Arial, sans-serif;
    text-align: center;
 }
 
-/* Department title */
 #departmentName{
-   color: rgb(140, 93, 36);
-
    font-size: 36px;
-
    margin-bottom: 25px;
    padding-bottom: 10px;
-
    border-bottom: 3px solid rgb(140, 93, 36);
-
    width: 80%;
    max-width: 1100px;
 }
 
-/* Main container */
 #piecesDiv{
    width: 80%;
    max-width: 1100px;
 }
 
-/* 2-column grid */
 #piecesList{
    list-style-type: none;
-
    display: grid;
    grid-template-columns: repeat(2, 1fr);
-
    gap: 25px;
-
    padding: 0;
    margin: 0;
 }
 
-/* Individual art piece card */
 #piecesList li{
    background-color: white;
-
-   border-radius: 12px;
-
    padding: 20px;
-
    box-sizing: border-box;
-
    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
-
    display: flex;
    flex-direction: column;
    align-items: center;
-
    transition: transform 0.2s ease,
-               box-shadow 0.2s ease;
+   box-shadow 0.2s ease;
+   position: relative;
+   overflow: hidden;
 }
 
-/* Hover effect */
-#piecesList li:hover{
-   transform: translateY(-5px);
-
-   box-shadow: 0 8px 18px rgba(0,0,0,0.24);
+.descriptionContainer {
+   position: absolute;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background: rgba(255, 255, 255, 0.95);
+   padding: 15px;
+   transform: translateY(100%);
+   opacity: 0;
+   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-/* Header section */
+.description{
+   white-space: pre-line;
+}
+
+#piecesList li:hover .descriptionContainer {
+   transform: translateY(0);
+   opacity: 1;
+   box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   background-color: #2a2a2ab7;
+   color: white;
+}
+
 .pieceHeader{
    margin-bottom: 15px;
 }
 
-/* Piece title */
 .pieceName{
    font-size: 22px;
    font-weight: bold;
-
-   color: rgb(140, 93, 36);
-
    margin: 0 0 8px 0;
 }
 
-/* Author */
 .pieceAuthor{
    font-size: 18px;
    color: #555;
-
    margin: 0;
 }
 
-/* Image container */
 .pieceImg{
    width: 100%;
-
    display: flex;
    justify-content: center;
    align-items: center;
 }
 
-/* Artwork image */
 .pieceImg img{
    max-width: 100%;
    height: auto;
-
    max-height: 350px;
-
    object-fit: contain;
-
    border-radius: 10px;
-
    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
