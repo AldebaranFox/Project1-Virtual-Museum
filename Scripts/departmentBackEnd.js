@@ -1,9 +1,15 @@
 
 const selectedDepartmentAndImgToggle = JSON.parse(localStorage.getItem('selectedDepartmentAndImgToggle'));
 
-
+//Generate page and every 5s add 10 items
+let numItems = 10;
 generatePage();
-getArtPieces();
+for (let i = 0; i < 6; i++) {
+   setTimeout(() => {
+      getArtPieces(numItems * i, numItems * (i + 1));
+   }, 5000 * i);
+}
+
 
 //* Fill out currently available elements of page
 function generatePage(){
@@ -12,21 +18,19 @@ function generatePage(){
 }
 
 //* Fetch # art piece Ids for the selected department
-async function getArtPieces(){
-   const itemCount = 15;
+async function getArtPieces(firstItemIndex,itemCount){
    const response = await fetch(
       `https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=${selectedDepartmentAndImgToggle.id}`
    );
    const json = await response.json();
 
-   const piecesIdList = (json.objectIDs || []).slice(0, itemCount);
+   const piecesIdList = (json.objectIDs || []).slice(firstItemIndex, itemCount);
    populatePiecesList(piecesIdList);
 }
 
 //* Populates the list of art pieces
 async function populatePiecesList(piecesIdList){
    const piecesList = document.querySelector('#piecesList');
-   piecesList.innerHTML = '';
 
    // makes all # piece data requests in parallel
    const piecesResult = await Promise.all(
